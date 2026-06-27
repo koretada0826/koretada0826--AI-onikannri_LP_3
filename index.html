@@ -54,22 +54,36 @@
     transform:skewX(-22deg); animation:sheen 5s ease-in-out infinite; pointer-events:none; }
   @keyframes sheen{ 0%{left:-45%} 55%,100%{left:130%} }
 
-  /* 埋め込みフォーム */
+  /* 埋め込みフォーム（スマホ＝縦1列。高さはフォーム実寸に合わせ空白を出さない） */
   #form{ max-width:1080px; margin:0 auto; background:#fff; }
   #form .fh{ background:#000; color:#fff; text-align:center; padding:24px 16px 18px; border-top:3px solid var(--red); }
   #form .fh .ey{ color:var(--red2); font-size:12px; letter-spacing:.16em; font-weight:800; }
   #form .fh h2{ font-size:24px; font-weight:900; margin-top:8px; }
   #form .fh p{ font-size:12.5px; color:#cfcfd4; margin-top:8px; }
-  #form iframe{ width:100%; min-height:3000px; border:0; display:block; background:#fff; }
+  #form iframe{ width:100%; min-height:2780px; border:0; display:block; background:#fff; }
 
   footer{ max-width:1080px; margin:0 auto; background:#000; color:#7d828c;
     font-size:11px; line-height:1.7; text-align:center; padding:22px 16px 100px; }
+
+  /* ===== PC（≥1080px）＝本家と同じ2カラム：左LP／右フォーム固定 ===== */
+  @media(min-width:1080px){
+    .shell{ display:flex; align-items:flex-start; max-width:1540px; margin:0 auto; }
+    .lp{ flex:1 1 auto; min-width:0; max-width:1080px; margin:0; }
+    /* 右カラム＝フォームを画面の高さに固定し、中身は内部スクロール（=空白ゼロ・はみ出しゼロ） */
+    #form{ flex:0 0 460px; max-width:none; margin:0;
+      position:sticky; top:0; height:100vh; display:flex; flex-direction:column; }
+    #form .fh{ display:none; }                         /* フォーム自身に見出しがあるのでPCでは隠す */
+    #form iframe{ flex:1 1 auto; height:auto; min-height:0; }
+    .sticky{ display:none; }                           /* PCは常時フォームが見えるので追従CTA不要 */
+    footer{ max-width:1540px; }
+  }
 </style>
 </head>
 <body>
 
   <div class="pr-bar">広告／PR（株式会社GENAIのプロモーションを含みます）</div>
 
+  <div class="shell">
   <main class="lp" id="top">
     <!-- FV（PC/SP出し分け） -->
     <img class="fv-pc" src="fv_01.webp" width="1920" height="1004" fetchpriority="high" alt="AI鬼管理 業務自動化トレーニング">
@@ -121,9 +135,9 @@
     </div>
     <iframe id="genai-iframe"
       src="https://aikanri.genai-ai.co.jp/embed/contact-form/?agency=iida&utm_source=iida&utm_medium=agency_lp"
-      title="お問い合わせフォーム" loading="lazy"
-      style="width:100%; min-height:3000px; border:0;"></iframe>
+      title="お問い合わせフォーム" loading="lazy"></iframe>
   </section>
+  </div><!-- /.shell -->
 
   <footer>
     株式会社GENAI ／ AI鬼管理<br>
