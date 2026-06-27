@@ -1,0 +1,12 @@
+# OS
+.DS_Store
+
+# 元画像フォルダ（LP本体は使わない）
+PC版/
+スマホ版/
+
+# 中間・未使用ファイル
+補助金_faq_src.png
+補助金.png
+section_faq_02.webp
+ChatGPT Image*.png
